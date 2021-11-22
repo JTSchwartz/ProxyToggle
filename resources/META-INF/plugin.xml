@@ -1,0 +1,44 @@
+<idea-plugin>
+	<id>com.jtschwartz.proxytoggle</id>
+	<name>Proxy Toggle</name>
+	<version>1.2.3</version>
+	<vendor email="jacob@jtschwartz.com" url="https://jtschwartz.com">Jacob Schwartz</vendor>
+
+	<description><![CDATA[
+      		Proxy Toggle simplifies the process of switching between proxy configurations.
+
+      		For many who frequently connect and disconnect to VPNs throughout the day, it can be a hassle to toggle the correct proxy configuration give which network you're on.
+
+      		This plugin will allow you to select which configurations to use throughout the day and rotate between them, so you don't waste time rotating through unused options.
+      		Upon switching you will receive a helpful notification informing you of with proxy configuration you are now using.
+
+      		This change can be made via "Toggle Proxy" option in the Tools menu, or by the hotkey Alt+P.
+    ]]></description>
+
+	<change-notes><![CDATA[
+      		Initial implementation. No changes, just creation.
+    ]]>
+	</change-notes>
+
+	<idea-version since-build="212.3116.29"/>
+	<depends>com.intellij.modules.xml</depends>
+	<depends>com.intellij.modules.platform</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<applicationService serviceImplementation="com.jtschwartz.proxytoggle.ProxyToggleSettingsState"/>
+		<applicationConfigurable parentId="tools" instance="com.jtschwartz.proxytoggle.ProxyToggleSettingsConfigurable"
+								 id="com.jtschwartz.proxytoggle.ProxyToggleSettingsConfigurable"
+								 displayName="Proxy Toggle"/>
+		<notificationGroup id="Proxy Setting Toggle Notifications" displayType="TOOL_WINDOW"/>
+	</extensions>
+
+	<actions>
+
+		<action id="com.jtschwartz.proxytoggle.ProxyToggle" class="com.jtschwartz.proxytoggle.ProxyToggle"
+				text="Toggle Proxy" description="Enable/disable proxy at will">
+			<add-to-group group-id="ToolsMenu" anchor="first"/>
+			<keyboard-shortcut keymap="$default" first-keystroke="alt P"/>
+		</action>
+	</actions>
+
+</idea-plugin>
